@@ -1,12 +1,14 @@
-﻿@using DrinkAndGo.Data.Models
-@model IEnumerable<Drink>
+﻿@using DrinkAndGo.ViewModels
+@model DrinkListViewModel
 
 <div>
     <h2>All drinks are shown here</h2>
 </div>
 
+<h2>@Model.CurrentCategory</h2>
+
 @{
-    foreach (var drink in Model)
+    foreach (var drink in Model.Drinks)
     {
         <div>
             <h4>Drink Name: @drink.Name</h4>
