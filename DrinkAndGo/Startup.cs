@@ -12,6 +12,8 @@ using DrinkAndGo.Data.Mocks;
 using Microsoft.Extensions.Configuration;
 using DrinkAndGo.Data;
 using Microsoft.EntityFrameworkCore;
+using DrinkAndGo.Data.Repositories;
+
 
 namespace DrinkAndGo
 {
@@ -33,8 +35,11 @@ namespace DrinkAndGo
             //Server configuration
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<IDrinkRepository, MockDrinkRepository>();
-            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+            //services.AddTransient<IDrinkRepository, MockDrinkRepository>();
+            //services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+
+            services.AddTransient<IDrinkRepository, DrinkRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
             services.AddMvc();
         }
