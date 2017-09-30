@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using DrinkAndGo.Data;
 using Microsoft.EntityFrameworkCore;
 using DrinkAndGo.Data.Repositories;
-
+using DrinkAndGo.Data.Models;
 
 namespace DrinkAndGo
 {
@@ -37,11 +37,15 @@ namespace DrinkAndGo
 
             //services.AddTransient<IDrinkRepository, MockDrinkRepository>();
             //services.AddTransient<ICategoryRepository, MockCategoryRepository>();
-
             services.AddTransient<IDrinkRepository, DrinkRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShoppingCart.GetCart(sp));
+
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +55,7 @@ namespace DrinkAndGo
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
 
             DbInitializer.Seed(app);
