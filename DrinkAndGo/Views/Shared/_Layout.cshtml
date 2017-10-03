@@ -20,10 +20,11 @@
                     <span class="navbar-toggler-icon"></span>
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">Drink & Go</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
+                    <li><a asp-controller="Home" asp-action="Index"> Home </a></li>
+                    <li><a asp-controller="Contact" asp-action="Index"> Contact Us </a></li>
                     @await Component.InvokeAsync("ShoppingCartSummary")
                 </ul>
             </div>@*/.nav-collapse*@
