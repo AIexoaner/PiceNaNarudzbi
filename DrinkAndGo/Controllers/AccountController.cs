@@ -52,5 +52,33 @@ namespace DrinkAndGo.Controllers
             ModelState.AddModelError("", "Username/password not found");
             return View(loginViewModel);
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(LoginViewModel loginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser() { UserName = loginViewModel.UserName };
+                var result = await _userManager.CreateAsync(user, loginViewModel.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(loginViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
