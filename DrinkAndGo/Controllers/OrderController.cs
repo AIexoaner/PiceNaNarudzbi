@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DrinkAndGo.Data.Interfaces;
 using DrinkAndGo.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,11 +22,13 @@ namespace DrinkAndGo.Controllers
             _shoppingCart = shoppingCart;
         }
 
+        [Authorize]
         public IActionResult CheckOut()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CheckOut(Order order)
         {

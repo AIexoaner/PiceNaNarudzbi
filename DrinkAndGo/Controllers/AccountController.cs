@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using DrinkAndGo.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -74,6 +75,7 @@ namespace DrinkAndGo.Controllers
             return View(loginViewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
